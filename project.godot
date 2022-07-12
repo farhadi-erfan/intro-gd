@@ -11,7 +11,11 @@ config_version=4
 [application]
 
 config/name="Intro-gd"
-config/icon="res://icon.png"
+run/main_scene="res://Test.tscn"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/intro_gd/plugin.cfg" )
 
 [physics]
 

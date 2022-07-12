@@ -1,0 +1,81 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://addons/intro_gd/intro_controller.gd" type="Script" id=1]
+[ext_resource path="res://addons/intro_gd/intro_tip.gd" type="Script" id=2]
+[ext_resource path="res://icon.png" type="Texture" id=3]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Icon" type="Sprite" parent="."]
+position = Vector2( 394.5, 280.5 )
+scale = Vector2( 7.26563, 7.26563 )
+texture = ExtResource( 3 )
+
+[node name="IntroController" type="Node2D" parent="."]
+script = ExtResource( 1 )
+
+[node name="IntroTip" type="Polygon2D" parent="IntroController"]
+position = Vector2( -102, 50 )
+color = Color( 0, 0, 0, 0.784314 )
+polygon = PoolVector2Array( 496, 297, 498, 362, 502, 365, 512, 366, 686, 362, 697, 350, 698, 340, 697, 288, 683, 285, 665, 284, 508, 285, 503, 290 )
+script = ExtResource( 2 )
+text = "salam"
+
+[node name="IntroTip2" type="Polygon2D" parent="IntroController"]
+color = Color( 0, 0, 0, 0.784314 )
+polygon = PoolVector2Array( 178, 112, 172, 217, 301, 205, 339, 163, 368, 86 )
+script = ExtResource( 2 )
+text = "olaghe aziz"
+
+[node name="IntroTip3" type="Polygon2D" parent="IntroController"]
+position = Vector2( 186, 15 )
+color = Color( 0, 0, 0, 0.784314 )
+polygon = PoolVector2Array( 246, 252, 246, 293, 263.132, 306.516, 313, 305, 334, 271, 312, 240, 270, 233 )
+script = ExtResource( 2 )
+text = "halet chetore?"
+
+[node name="IntroTip4" type="Polygon2D" parent="IntroController"]
+position = Vector2( -16, 250 )
+color = Color( 0, 0, 0, 0.784314 )
+polygon = PoolVector2Array( 198, 154, 172, 217, 235, 188, 299, 204, 285, 125, 233, 115 )
+script = ExtResource( 2 )
+text = "Khoof o Khosho salamati?"
+
+[node name="Node2D" type="Node2D" parent="IntroController"]
+position = Vector2( 27, 36 )
+
+[node name="VSplitContainer" type="VSplitContainer" parent="IntroController/Node2D"]
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="IntroController/Node2D/VSplitContainer"]
+margin_right = 110.0
+margin_bottom = 14.0
+text = "PlaceHolder Text"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HSplitContainer" type="HSplitContainer" parent="IntroController/Node2D/VSplitContainer"]
+margin_top = 26.0
+margin_right = 110.0
+margin_bottom = 46.0
+
+[node name="Prev" type="Button" parent="IntroController/Node2D/VSplitContainer/HSplitContainer"]
+margin_right = 48.0
+margin_bottom = 20.0
+disabled = true
+text = "<Prev"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Next" type="Button" parent="IntroController/Node2D/VSplitContainer/HSplitContainer"]
+margin_left = 60.0
+margin_right = 110.0
+margin_bottom = 20.0
+text = "Next>"
+__meta__ = {
+"_edit_use_anchors_": false
+}
