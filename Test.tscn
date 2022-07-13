@@ -1,0 +1,57 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://addons/intro_gd/intro_controller.gd" type="Script" id=1]
+[ext_resource path="res://addons/intro_gd/intro_tip.gd" type="Script" id=2]
+[ext_resource path="res://icon.png" type="Texture" id=3]
+[ext_resource path="res://Test.gd" type="Script" id=4]
+
+[sub_resource type="Theme" id=1]
+Button/colors/font_color = Color( 0.537255, 0.596078, 0.819608, 1 )
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource( 4 )
+
+[node name="Icon" type="Sprite" parent="."]
+position = Vector2( 394.5, 280.5 )
+scale = Vector2( 7.26563, 7.26563 )
+texture = ExtResource( 3 )
+
+[node name="IntroController" type="Node2D" parent="."]
+script = ExtResource( 1 )
+intro_name = "new_intro"
+theme = SubResource( 1 )
+
+[node name="IntroTip" type="Polygon2D" parent="IntroController"]
+position = Vector2( -102, 50 )
+color = Color( 0, 0, 0, 0.784314 )
+polygon = PoolVector2Array( 496, 297, 498, 362, 502, 365, 512, 366, 686, 362, 697, 350, 698, 340, 697, 288, 683, 285, 665, 284, 508, 285, 503, 290 )
+script = ExtResource( 2 )
+text = "salam"
+
+[node name="IntroTip2" type="Polygon2D" parent="IntroController"]
+color = Color( 0, 0, 0, 0.784314 )
+polygon = PoolVector2Array( 178, 112, 172, 217, 301, 205, 339, 163, 368, 86 )
+script = ExtResource( 2 )
+text = "olaghe aziz"
+
+[node name="IntroTip3" type="Polygon2D" parent="IntroController"]
+position = Vector2( 186, 15 )
+color = Color( 0, 0, 0, 0.784314 )
+polygon = PoolVector2Array( 246, 252, 246, 293, 263.132, 306.516, 313, 305, 334, 271, 312, 240, 270, 233 )
+script = ExtResource( 2 )
+text = "halet chetore?"
+
+[node name="IntroTip4" type="Polygon2D" parent="IntroController"]
+position = Vector2( -16, 250 )
+color = Color( 0, 0, 0, 0.784314 )
+polygon = PoolVector2Array( 198, 154, 172, 217, 235, 188, 299, 204, 285, 125, 233, 115 )
+script = ExtResource( 2 )
+text = "Khoof o Khosho salamati?"
+
+[node name="Button" type="Button" parent="."]
+margin_right = 76.0
+margin_bottom = 69.0
+text = "Replay"
+__meta__ = {
+"_edit_use_anchors_": false
+}
