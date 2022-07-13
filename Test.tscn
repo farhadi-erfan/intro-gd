@@ -1,10 +1,15 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://addons/intro_gd/intro_controller.gd" type="Script" id=1]
 [ext_resource path="res://addons/intro_gd/intro_tip.gd" type="Script" id=2]
 [ext_resource path="res://icon.png" type="Texture" id=3]
+[ext_resource path="res://Test.gd" type="Script" id=4]
+
+[sub_resource type="Theme" id=1]
+Button/colors/font_color = Color( 0.537255, 0.596078, 0.819608, 1 )
 
 [node name="Node2D" type="Node2D"]
+script = ExtResource( 4 )
 
 [node name="Icon" type="Sprite" parent="."]
 position = Vector2( 394.5, 280.5 )
@@ -13,6 +18,8 @@ texture = ExtResource( 3 )
 
 [node name="IntroController" type="Node2D" parent="."]
 script = ExtResource( 1 )
+intro_name = "new_intro"
+theme = SubResource( 1 )
 
 [node name="IntroTip" type="Polygon2D" parent="IntroController"]
 position = Vector2( -102, 50 )
@@ -41,41 +48,10 @@ polygon = PoolVector2Array( 198, 154, 172, 217, 235, 188, 299, 204, 285, 125, 23
 script = ExtResource( 2 )
 text = "Khoof o Khosho salamati?"
 
-[node name="Node2D" type="Node2D" parent="IntroController"]
-position = Vector2( 27, 36 )
-
-[node name="VSplitContainer" type="VSplitContainer" parent="IntroController/Node2D"]
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="IntroController/Node2D/VSplitContainer"]
-margin_right = 110.0
-margin_bottom = 14.0
-text = "PlaceHolder Text"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="HSplitContainer" type="HSplitContainer" parent="IntroController/Node2D/VSplitContainer"]
-margin_top = 26.0
-margin_right = 110.0
-margin_bottom = 46.0
-
-[node name="Prev" type="Button" parent="IntroController/Node2D/VSplitContainer/HSplitContainer"]
-margin_right = 48.0
-margin_bottom = 20.0
-disabled = true
-text = "<Prev"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Next" type="Button" parent="IntroController/Node2D/VSplitContainer/HSplitContainer"]
-margin_left = 60.0
-margin_right = 110.0
-margin_bottom = 20.0
-text = "Next>"
+[node name="Button" type="Button" parent="."]
+margin_right = 76.0
+margin_bottom = 69.0
+text = "Replay"
 __meta__ = {
 "_edit_use_anchors_": false
 }

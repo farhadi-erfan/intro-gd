@@ -1,16 +1,25 @@
 extends Node2D
 
-signal start_intro
-signal intro_ended
+signal intro_ended(intro_name)
 
 var TipClass = preload("res://addons/intro_gd/intro_tip.gd")
 
 export var intro_name: String
+export var theme: Theme
+export var label_class_path: String
+
+var has_played = false
 
 var intros
-var has_played = false
 var current_tip = -1
 var tips_len = 0
+
+var node_2d_controllers_container = Node2D.new()
+var vsplit = VSplitContainer.new()
+var hsplit = HSplitContainer.new()
+var prev_btn = Button.new()
+var next_btn = Button.new()
+var label = Label.new()
 
 func _ready():
 	var intro_data = File.new()
@@ -24,22 +33,41 @@ func _ready():
 		intros = {}
 	if intros.has(intro_name):
 		has_played = intros[intro_name]
-
-	self.connect("start_intro", self, "start")
 	
-	$Node2D/VSplitContainer/HSplitContainer/Next.connect("pressed", self, "play_next")
-	$Node2D/VSplitContainer/HSplitContainer/Prev.connect("pressed", self, "play_prev")
+	var LabelClass = load(label_class_path)
+	if LabelClass != null and LabelClass is Label:
+		label = LabelClass.new()
+	
+	hsplit.add_child(prev_btn)
+	hsplit.add_child(next_btn)
+	vsplit.add_child(label)
+	vsplit.add_child(hsplit)
+	node_2d_controllers_container.add_child(vsplit)
+	self.add_child(node_2d_controllers_container)
+	
+	vsplit.theme = self.theme
+	node_2d_controllers_container.visible = false
+	next_btn.text = 'Next>'
+	prev_btn.text = '<Prev'
+	
+	next_btn.connect("pressed", self, "play_next")
+	prev_btn.connect("pressed", self, "play_prev")
 	
 	for c in self.get_children():
 		if c is TipClass:
 			tips_len += 1
-	
-	start()
+
+func reset():
+	if has_played:
+		has_played = false
+		current_tip = -1
 
 func start():
-	$Node2D.visible = true
+	if node_2d_controllers_container.visible:
+		return
+	node_2d_controllers_container.visible = true
 	play_next()
-	$Node2D/VSplitContainer/HSplitContainer/Prev.disabled = true
+	prev_btn.disabled = true
 
 func play_next():
 	if not has_played and current_tip < tips_len - 1:
@@ -47,21 +75,24 @@ func play_next():
 		current_tip += 1
 		show_tip(self.get_children()[current_tip])
 		if current_tip == tips_len - 1:
-			$Node2D/VSplitContainer/HSplitContainer/Next.text = 'End'
+			next_btn.text = 'End'
 		
-		if $Node2D/VSplitContainer/HSplitContainer/Prev.disabled:
-			$Node2D/VSplitContainer/HSplitContainer/Prev.disabled = false
+		if prev_btn.disabled:
+			prev_btn.disabled = false
 	else:
-		$Node2D.visible = false
+		node_2d_controllers_container.visible = false
 		_before_end()
+		emit_signal("intro_ended", intro_name)
 
 func play_prev():
 	if current_tip > 0:
 		hide_last_tip()
 		current_tip -= 1
+		if next_btn.text == 'End':
+			next_btn.text = 'Next>'
 		show_tip(self.get_children()[current_tip])
 		if current_tip == 0:
-			$Node2D/VSplitContainer/HSplitContainer/Prev.disabled = true
+			prev_btn.disabled = true
 
 func hide_last_tip():
 	var c = self.get_children()[current_tip]
@@ -70,9 +101,10 @@ func hide_last_tip():
 
 func show_tip(tip):
 	tip.visible = true
-	$Node2D/VSplitContainer/Label.text = tip.text
-	tip.refresh_text_pos($Node2D/VSplitContainer.get_rect().size.y)
-	$Node2D.position = tip.text_pos
+	label.text = tip.text
+	#TODO - change for persian label
+	tip.refresh_text_pos(vsplit.get_rect().size.y)
+	node_2d_controllers_container.position = tip.text_pos
 
 
 func _before_end():
