@@ -1,5 +1,5 @@
-
-easy to use add-on for creating tutorials and introduction section inside scenes.
+Intro-GD
+easy to use add-on for creating tutorials and introduction section inside godot scenes.
 Create an IntroController, and set its name/theme (for label and buttons). Then add IntroTip nodes to it as children. set highlighted area for your tip using Godot's native polygon tool, give it a tip text, and then start the intro by calling start() on Introcontroller.
 Check out the Test.tscn for more details on how to use.
 <br/>
